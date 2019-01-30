@@ -10,6 +10,7 @@
 		<module>user-service-client</module>
 		<module>user-service-provider</module>
 		<module>user-api</module>
+		<module>config-server</module>
 	</modules>
 
 	<packaging>pom</packaging>
