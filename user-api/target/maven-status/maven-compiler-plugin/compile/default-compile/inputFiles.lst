@@ -1,1 +1,3 @@
+E:\workspace\microService\user-api\src\main\java\com\globalcash\spring\cloud\service\UserService.java
 E:\workspace\microService\user-api\src\main\java\com\globalcash\spring\cloud\domain\User.java
+E:\workspace\microService\user-api\src\main\java\com\globalcash\spring\cloud\fallback\UserServiceFallback.java

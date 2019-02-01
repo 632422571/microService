@@ -20,6 +20,13 @@
             <artifactId>user-api</artifactId>
             <version>${project.version}</version>
         </dependency>
+
+        <!--依赖eureka注册中心-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+
     </dependencies>
 
 </project>
