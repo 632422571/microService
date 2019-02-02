@@ -1,5 +1,6 @@
 package com.globalcash.spring.cloud;
 
+import com.globalcash.spring.cloud.service.TestService;
 import com.globalcash.spring.cloud.service.UserService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -25,7 +26,9 @@ import org.springframework.web.client.RestTemplate;
 @EnableDiscoveryClient
 @SpringBootApplication
 @EnableCircuitBreaker // 使用服务短路
-@EnableFeignClients(clients = UserService.class) // 声明 UserService 接口作为 Feign Client 调用
+//@EnableFeignClients(clients = UserService.class) // 声明 UserService 接口作为 Feign Client 调用
+//@EnableFeignClients(clients = {UserService.class, TestService.class} )  //定义多个类
+@EnableFeignClients(basePackages = "com.globalcash.spring.cloud.service")  //定义包下的
 public class UserServiceClientApplication {
 
     public static void main(String[] args) {
