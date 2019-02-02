@@ -14,7 +14,8 @@
 		<module>config-test</module>
         <module>eureka-server</module>
 		<module>hystrix-dashboard</module>
-	</modules>
+        <module>zuul-proxy</module>
+    </modules>
 
 	<packaging>pom</packaging>
 

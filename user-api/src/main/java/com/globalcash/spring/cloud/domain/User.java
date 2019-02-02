@@ -1,10 +1,14 @@
 package com.globalcash.spring.cloud.domain;
 
+
+import java.io.Serializable;
+
 /**
  * @author gh
  * @date 2019/1/29 14:09
  */
-public class User {
+public class User implements Serializable {
+    private static final long serialVersionUID = -6599593059266413510L;
     private Long id;
 
     private String name;

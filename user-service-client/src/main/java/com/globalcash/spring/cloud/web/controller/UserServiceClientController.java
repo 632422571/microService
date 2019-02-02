@@ -4,8 +4,12 @@ import com.globalcash.spring.cloud.domain.User;
 import com.globalcash.spring.cloud.service.TestService;
 import com.globalcash.spring.cloud.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.support.SendResult;
+import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,6 +29,19 @@ public class UserServiceClientController implements UserService,TestService {
 
     @Autowired
     private TestService testService;
+
+    private final KafkaTemplate<String, Object> kafkaTemplate;
+
+    @Autowired
+    public UserServiceClientController(KafkaTemplate kafkaTemplate) {
+        this.kafkaTemplate = kafkaTemplate;
+    }
+
+    @PostMapping("/user/save/message")
+    public boolean saveUserByMessage(@RequestBody User user) {
+        ListenableFuture<SendResult<String,Object>> future = kafkaTemplate.send("gc-users","0",user);
+        return future.isDone();
+    }
 
     @Override
     public boolean saveUser(@RequestBody User user) {
