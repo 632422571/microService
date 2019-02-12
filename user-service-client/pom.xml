@@ -45,6 +45,18 @@
             <artifactId>spring-kafka</artifactId>
         </dependency>
 
+        <!--&lt;!&ndash; 依赖 Spring Cloud Stream Binder Kafka &ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.cloud</groupId>-->
+            <!--<artifactId>spring-cloud-stream-binder-kafka</artifactId>-->
+        <!--</dependency>-->
+
+       <!-- &lt;!&ndash; 整合 Spring Cloud Stream Binder Rabbit MQ -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-stream-binder-rabbit</artifactId>
+        </dependency>
+
     </dependencies>
 
 </project>

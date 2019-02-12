@@ -27,6 +27,24 @@
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
 
+      <!--  &lt;!&ndash; 整合 Kafka &ndash;&gt; 可不需要这个依赖
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
+        </dependency>-->
+
+        <!-- 依赖 Spring Cloud Stream Binder Kafka -->
+      <!--  <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-stream-binder-kafka</artifactId>
+        </dependency>-->
+
+        <!-- 整合 Spring Cloud Stream Binder Rabbit MQ -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-stream-binder-rabbit</artifactId>
+        </dependency>
+
     </dependencies>
 
 </project>

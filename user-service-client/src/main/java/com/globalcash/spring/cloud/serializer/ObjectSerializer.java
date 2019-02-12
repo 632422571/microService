@@ -11,13 +11,16 @@ import java.util.Map;
  * @date 2019/2/2 11:47
  */
 public class ObjectSerializer implements Serializer<Object> {
+
+
     @Override
-    public void configure(Map<String, ?> map, boolean b) {
+    public void configure(Map<String, ?> configs, boolean isKey) {
 
     }
 
     @Override
     public byte[] serialize(String topic, Object object) {
+
         System.out.println("topic : " + topic + " , object : " + object);
 
         byte[] dataArray = null;
@@ -33,6 +36,7 @@ public class ObjectSerializer implements Serializer<Object> {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+
 
         return dataArray;
     }

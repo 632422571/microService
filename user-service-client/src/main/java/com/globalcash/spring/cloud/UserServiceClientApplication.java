@@ -2,6 +2,7 @@ package com.globalcash.spring.cloud;
 
 import com.globalcash.spring.cloud.service.TestService;
 import com.globalcash.spring.cloud.service.UserService;
+import com.globalcash.spring.cloud.stream.UserMessage;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
@@ -10,6 +11,7 @@ import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.ribbon.RibbonClient;
 import org.springframework.cloud.netflix.ribbon.RibbonClients;
 import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
@@ -29,6 +31,8 @@ import org.springframework.web.client.RestTemplate;
 //@EnableFeignClients(clients = UserService.class) // 声明 UserService 接口作为 Feign Client 调用
 //@EnableFeignClients(clients = {UserService.class, TestService.class} )  //定义多个类
 @EnableFeignClients(basePackages = "com.globalcash.spring.cloud.service")  //定义包下的
+@EnableBinding(UserMessage.class)
+//有时候半天起不来，请检查mq,如：kafka 是否运行正常
 public class UserServiceClientApplication {
 
     public static void main(String[] args) {

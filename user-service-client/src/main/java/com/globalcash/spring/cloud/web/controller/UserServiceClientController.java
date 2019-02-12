@@ -1,11 +1,16 @@
 package com.globalcash.spring.cloud.web.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.globalcash.spring.cloud.domain.User;
 import com.globalcash.spring.cloud.service.TestService;
 import com.globalcash.spring.cloud.service.UserService;
+import com.globalcash.spring.cloud.stream.UserMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
+import org.springframework.messaging.MessageChannel;
+import org.springframework.messaging.support.GenericMessage;
 import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +23,8 @@ import java.util.Collection;
 import java.util.List;
 
 /**
+ * 注意：官方建议 客户端和服务端不要同时实现 Feign 接口
+ * 这里的代码只是一个说明，实际情况最好使用组合的方式，而不是继承
  * @author gh
  * @date 2019/2/1 16:11
  */
@@ -37,10 +44,27 @@ public class UserServiceClientController implements UserService,TestService {
         this.kafkaTemplate = kafkaTemplate;
     }
 
+    @Autowired
+    private UserMessage userMessage;
+
+    @Autowired
+    private ObjectMapper objectMapper;
+
+
     @PostMapping("/user/save/message")
     public boolean saveUserByMessage(@RequestBody User user) {
-        ListenableFuture<SendResult<String,Object>> future = kafkaTemplate.send("gc-users","0",user);
+        ListenableFuture<SendResult<String,Object>> future = kafkaTemplate.send("gc-users", user);
         return future.isDone();
+    }
+
+    @PostMapping("/user/save/message/rabbit")
+    public boolean saveUserByRabbitMessage(@RequestBody User user) throws JsonProcessingException {
+        MessageChannel messageChannel = userMessage.output();
+        // User 序列化成 JSON
+        String payload = objectMapper.writeValueAsString(user);
+        GenericMessage<String> message = new GenericMessage<String>(payload);
+        // 发送消息
+        return messageChannel.send(message);
     }
 
     @Override
