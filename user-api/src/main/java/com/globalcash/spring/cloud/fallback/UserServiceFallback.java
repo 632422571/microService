@@ -1,7 +1,7 @@
 package com.globalcash.spring.cloud.fallback;
 
-import com.globalcash.spring.cloud.domain.User;
 import com.globalcash.spring.cloud.service.UserService;
+import com.globalcash.spring.cloud.domain.User;
 
 import java.util.Collections;
 import java.util.List;

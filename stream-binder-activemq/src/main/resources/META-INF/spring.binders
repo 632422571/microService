@@ -1,0 +1,2 @@
+activemq :\
+com.globalcash.spring.cloud.stream.binder.activemq.ActiveMQStreamBinderAutoConfiguration

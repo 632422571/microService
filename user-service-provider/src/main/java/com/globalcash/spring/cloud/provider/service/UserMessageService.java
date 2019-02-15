@@ -1,24 +1,26 @@
 package com.globalcash.spring.cloud.provider.service;
 
+import com.alibaba.fastjson.JSON;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.globalcash.spring.cloud.domain.User;
+import com.globalcash.spring.cloud.provider.stream.UserMessage;
 import com.globalcash.spring.cloud.service.UserService;
-import com.globalcash.spring.cloud.provider.service.stream.UserMessage;
+import org.apache.activemq.util.ByteSequence;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.integration.annotation.ServiceActivator;
 import org.springframework.messaging.SubscribableChannel;
+import org.springframework.messaging.support.GenericMessage;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 
-import static com.globalcash.spring.cloud.provider.service.stream.UserMessage.INPUT;
+import static com.globalcash.spring.cloud.provider.stream.UserMessage.INPUT;
 
 /**
  * @author gh
@@ -92,5 +94,58 @@ public class UserMessageService {
                 saveUser(body);
             }
         });
+
+        // 监听 ActiveMQ Stream
+        userMessage.activeMQIn().subscribe(message -> {
+
+            if (message instanceof GenericMessage) {
+                GenericMessage genericMessage = (GenericMessage) message;
+                User user = (User)this.ByteToObject(((ByteSequence) genericMessage.getPayload()).getData(),User.class);
+//                User user = (User) genericMessage.getPayload();
+                userService.saveUser(user);
+            }
+        });
+    }
+
+    @StreamListener("activemq-in")
+    public void onUserMessage(User user) throws IOException {
+        System.out.println("Subscribe by @StreamListener");
+        userService.saveUser(user);
+    }
+
+    /**
+     * 该方法传ByteArrayInputStream.getByte
+     * byte转对象
+     * @param bytes
+     * @return
+     */
+    /*private Object ByteToObject(byte[] bytes) {
+        Object obj = null;
+        try {
+            // bytearray to object
+            ByteArrayInputStream bi = new ByteArrayInputStream(bytes);
+            ObjectInputStream oi = new ObjectInputStream(bi);
+
+            obj = oi.readObject();
+            bi.close();
+            oi.close();
+        } catch (Exception e) {
+            System.out.println("translation" + e.getMessage());
+            e.printStackTrace();
+        }
+        return obj;
+    }*/
+
+    private Object ByteToObject(byte[] bytes,Class objClass) {
+        return JSON.parseObject(new String(bytes),objClass);
+    }
+
+    public static void main(String[] args) {
+        User user=new User();
+        user.setId(1l);
+        user.setName("Hank");
+        byte[] ub=JSON.toJSONString(user).getBytes();
+        System.out.println(JSON.toJSONString(user));
+        System.out.println(JSON.parseObject(new String(ub),User.class).getName());
     }
 }
