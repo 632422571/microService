@@ -1,4 +1,4 @@
-package com.globalcash.spring.cloud.provider.web.controller;
+package com.globalcash.spring.cloud.client.web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

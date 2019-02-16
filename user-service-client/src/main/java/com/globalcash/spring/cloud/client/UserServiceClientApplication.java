@@ -1,6 +1,7 @@
-package com.globalcash.spring.cloud.provider;
+package com.globalcash.spring.cloud.client;
 
-import com.globalcash.spring.cloud.provider.stream.UserMessage;
+import brave.sampler.Sampler;
+import com.globalcash.spring.cloud.client.stream.UserMessage;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
@@ -44,4 +45,11 @@ public class UserServiceClientApplication {
     public RestTemplate restTemplate() {
         return new RestTemplate();
     }
+
+    //添加了Sampler的默认采样bean，不然zipkin无法收集到数据
+    @Bean
+    public Sampler defaultSampler(){
+        return Sampler.ALWAYS_SAMPLE;
+    }
+
 }

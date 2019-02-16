@@ -55,7 +55,7 @@ public class ActiveMQMessageChannelBinder implements Binder<MessageChannel, Cons
                     } catch (JMSException e) {
                         e.printStackTrace();
                     }
-                } else {
+                } else if (message instanceof ActiveMQBytesMessage) {
                     ActiveMQBytesMessage activeMQBytesMessage = (ActiveMQBytesMessage) message;
                     Object object = activeMQBytesMessage.getContent();
                     inboundBindTarget.send(new GenericMessage<Object>(object));

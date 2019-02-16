@@ -1,4 +1,4 @@
-package com.globalcash.spring.cloud.provider.event;
+package com.globalcash.spring.cloud.event;
 
 import com.globalcash.spring.cloud.domain.User;
 import org.springframework.cloud.bus.event.RemoteApplicationEvent;

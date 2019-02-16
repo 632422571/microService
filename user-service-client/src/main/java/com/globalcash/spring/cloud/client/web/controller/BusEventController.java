@@ -1,6 +1,6 @@
-package com.globalcash.spring.cloud.provider.web.controller;
+package com.globalcash.spring.cloud.client.web.controller;
 
-import com.globalcash.spring.cloud.provider.event.UserRemoteApplicationEvent;
+import com.globalcash.spring.cloud.event.UserRemoteApplicationEvent;
 import com.globalcash.spring.cloud.domain.User;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;

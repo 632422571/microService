@@ -1,4 +1,4 @@
-package com.globalcash.spring.cloud.provider.serializer;
+package com.globalcash.spring.cloud.client.serializer;
 
 import org.apache.kafka.common.serialization.Serializer;
 

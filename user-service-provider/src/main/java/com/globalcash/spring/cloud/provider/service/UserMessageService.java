@@ -9,7 +9,9 @@ import com.globalcash.spring.cloud.service.UserService;
 import org.apache.activemq.util.ByteSequence;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.cloud.bus.event.RefreshRemoteApplicationEvent;
 import org.springframework.cloud.stream.annotation.StreamListener;
+import org.springframework.context.event.EventListener;
 import org.springframework.integration.annotation.ServiceActivator;
 import org.springframework.messaging.SubscribableChannel;
 import org.springframework.messaging.support.GenericMessage;
@@ -100,7 +102,7 @@ public class UserMessageService {
 
             if (message instanceof GenericMessage) {
                 GenericMessage genericMessage = (GenericMessage) message;
-                User user = (User)this.ByteToObject(((ByteSequence) genericMessage.getPayload()).getData(),User.class);
+                User user = (User)this.byteToObject(((ByteSequence) genericMessage.getPayload()).getData(),User.class);
 //                User user = (User) genericMessage.getPayload();
                 userService.saveUser(user);
             }
@@ -119,7 +121,7 @@ public class UserMessageService {
      * @param bytes
      * @return
      */
-    /*private Object ByteToObject(byte[] bytes) {
+    /*private Object byteToObject(byte[] bytes) {
         Object obj = null;
         try {
             // bytearray to object
@@ -136,7 +138,7 @@ public class UserMessageService {
         return obj;
     }*/
 
-    private Object ByteToObject(byte[] bytes,Class objClass) {
+    private Object byteToObject(byte[] bytes,Class objClass) {
         return JSON.parseObject(new String(bytes),objClass);
     }
 
@@ -147,5 +149,11 @@ public class UserMessageService {
         byte[] ub=JSON.toJSONString(user).getBytes();
         System.out.println(JSON.toJSONString(user));
         System.out.println(JSON.parseObject(new String(ub),User.class).getName());
+    }
+
+    @EventListener
+    public void onRefreshRemoteApplicationEvent(RefreshRemoteApplicationEvent event) {
+        User user = (User) event.getSource();
+        userService.saveUser(user);
     }
 }

@@ -16,6 +16,7 @@
 		<module>hystrix-dashboard</module>
         <module>zuul-proxy</module>
         <module>stream-binder-activemq</module>
+        <module>zipkin-server</module>
     </modules>
 
 	<packaging>pom</packaging>

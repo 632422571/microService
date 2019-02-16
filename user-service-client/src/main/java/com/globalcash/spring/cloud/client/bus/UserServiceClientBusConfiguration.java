@@ -1,5 +1,6 @@
-package com.globalcash.spring.cloud.provider.event;
+package com.globalcash.spring.cloud.client.bus;
 
+import com.globalcash.spring.cloud.event.UserRemoteApplicationEvent;
 import org.springframework.cloud.bus.event.EnvironmentChangeRemoteApplicationEvent;
 import org.springframework.cloud.bus.event.RefreshRemoteApplicationEvent;
 import org.springframework.cloud.bus.jackson.RemoteApplicationEventScan;
@@ -8,7 +9,7 @@ import org.springframework.context.event.EventListener;
 
 @Configuration
 @RemoteApplicationEventScan(basePackageClasses = UserRemoteApplicationEvent.class)
-public class BusConfiguration {
+public class UserServiceClientBusConfiguration {
 
     @EventListener
     public void onRefreshRemoteApplicationEvent(RefreshRemoteApplicationEvent event) {

@@ -1,7 +1,7 @@
-package com.globalcash.spring.cloud.provider.web.controller;
+package com.globalcash.spring.cloud.client.web.controller;
 
+import com.globalcash.spring.cloud.client.hystrix.UserRibbonClientHystrixCommand;
 import com.globalcash.spring.cloud.domain.User;
-import com.globalcash.spring.cloud.provider.hystrix.UserRibbonClientHystrixCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;

@@ -1,11 +1,11 @@
-package com.globalcash.spring.cloud.provider.web.controller;
+package com.globalcash.spring.cloud.client.web.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.globalcash.spring.cloud.domain.User;
 import com.globalcash.spring.cloud.service.TestService;
 import com.globalcash.spring.cloud.service.UserService;
-import com.globalcash.spring.cloud.provider.stream.UserMessage;
+import com.globalcash.spring.cloud.client.stream.UserMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.ByteArrayOutputStream;
 import java.util.List;
 
 /**

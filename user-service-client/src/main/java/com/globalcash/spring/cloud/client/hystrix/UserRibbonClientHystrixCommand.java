@@ -1,4 +1,4 @@
-package com.globalcash.spring.cloud.provider.hystrix;
+package com.globalcash.spring.cloud.client.hystrix;
 
 import com.globalcash.spring.cloud.domain.User;
 import com.netflix.hystrix.HystrixCommand;

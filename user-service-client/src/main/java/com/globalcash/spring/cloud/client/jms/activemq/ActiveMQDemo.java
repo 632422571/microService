@@ -1,4 +1,4 @@
-package com.globalcash.spring.cloud.provider.jms.activemq;
+package com.globalcash.spring.cloud.client.jms.activemq;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.command.ActiveMQTextMessage;
