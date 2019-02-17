@@ -17,6 +17,7 @@
         <module>zuul-proxy</module>
         <module>stream-binder-activemq</module>
         <module>zipkin-server</module>
+        <module>service-discovery-client</module>
     </modules>
 
 	<packaging>pom</packaging>

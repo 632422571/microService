@@ -1,4 +1,4 @@
-package com.globalcash.spring.cloud.provider.hystrix.dashboard;
+package com.globalcash.spring.cloud.hystrix.dashboard;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
