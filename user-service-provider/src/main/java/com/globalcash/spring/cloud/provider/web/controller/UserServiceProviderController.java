@@ -1,5 +1,6 @@
 package com.globalcash.spring.cloud.provider.web.controller;
 
+import com.globalcash.spring.cloud.provider.mapper.UserMapper;
 import com.globalcash.spring.cloud.service.UserService;
 import com.globalcash.spring.cloud.domain.User;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
@@ -37,7 +38,15 @@ public class UserServiceProviderController implements UserService {
     @Autowired
     private JmsTemplate jmsTemplate;
 
+    @Autowired
+    private UserMapper userMapper;
+
     private final static Random random = new Random();
+
+    @GetMapping("/user/data")
+    public List<User> getUserData() {
+        return  userMapper.getData();
+    }
 
 
     @GetMapping("/user/poll")

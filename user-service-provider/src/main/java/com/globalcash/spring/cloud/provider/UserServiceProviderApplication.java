@@ -1,6 +1,7 @@
 package com.globalcash.spring.cloud.provider;
 
 import com.globalcash.spring.cloud.provider.stream.UserMessage;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -16,6 +17,7 @@ import org.springframework.cloud.stream.annotation.EnableBinding;
 @EnableHystrix  //使用@EnableHystrix 实现服务提供方短路
 @EnableDiscoveryClient  // 激活服务发现客户端
 @EnableBinding(UserMessage.class) // 激活 Stream Binding 到 UserMessage
+@MapperScan(basePackages = { "com.globalcash.spring.cloud.provider.mapper" })
 public class UserServiceProviderApplication {
     public static void main(String[] args) {
         SpringApplication.run(UserServiceProviderApplication.class,args);
