@@ -18,6 +18,7 @@
         <module>stream-binder-activemq</module>
         <module>zipkin-server</module>
         <module>service-discovery-client</module>
+        <module>JDBC-config-manage</module>
     </modules>
 
 	<packaging>pom</packaging>

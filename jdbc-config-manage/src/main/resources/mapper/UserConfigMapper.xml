@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.globalcash.spring.cloud.provider.mapper.UserMapper" >
+<mapper namespace="com.globalcash.spring.cloud.config.mapper.UserConfigMapper" >
 
-    <resultMap id="BaseResultMap" type="com.globalcash.spring.cloud.domain.User" >
+    <resultMap id="BaseResultMap" type="com.globalcash.spring.cloud.config.domain.UserConfig" >
         <id column="id" property="id" jdbcType="INTEGER" />
         <result column="name" property="name" jdbcType="VARCHAR" />
     </resultMap>
 
-    <select id="getData" resultMap="BaseResultMap"  >
+    <select id="getUserConfig" resultMap="BaseResultMap"  >
         SELECT id, name FROM users
     </select>
+
+    <update id="updateUserConfig">
+        UPDATE users set name = #{name} where id = #{id}
+    </update>
 </mapper>
