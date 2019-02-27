@@ -19,6 +19,6 @@
 
  user-service-provider  用户模块生产者
 
- zipkin-server  2.0版本下没用
+ zipkin-server  在2.0版本下没用
 
  zuul-proxy    服务网关
