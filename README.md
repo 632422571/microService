@@ -3,13 +3,13 @@
 
  config-test    结合euraka的配置中心客户端
 
- eureka-server  euraka实现的服务发现
+ eureka-server  由euraka实现的服务发现
 
  hystrix-dashboard  熔断器仪表盘
 
  jdbc-config-manage  结合zookeeper节点、数据库的配置中心
 
- service-discovery-client  zookeeper实现的服务发现
+ service-discovery-client  由zookeeper实现的服务发现
 
  stream-binder-activemq   整合activemq
 
